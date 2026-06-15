@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.transparent_bedrock.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BlocksMixin",
+    "BlocksRegisterAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}
