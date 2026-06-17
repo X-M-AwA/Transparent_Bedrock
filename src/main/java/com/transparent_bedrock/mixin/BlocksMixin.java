@@ -1,13 +1,17 @@
 package com.transparent_bedrock.mixin;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Blocks.class)
+@Environment(EnvType.CLIENT)
 public abstract class BlocksMixin {
 
     @Redirect(
@@ -19,8 +23,8 @@ public abstract class BlocksMixin {
     )
     private static Block redirectRegister(String string, BlockBehaviour.Properties properties) {
         if ("bedrock".equals(string)) {
-            return BlocksRegisterAccessor.invokeRegister(string, properties.noOcclusion());
+            return BlocksRegisterAccessor.invokeRegister(string, TransparentBlock::new, properties.noOcclusion());
         }
-        return BlocksRegisterAccessor.invokeRegister(string, properties);
+        return BlocksRegisterAccessor.register(string, properties);
     }
 }
