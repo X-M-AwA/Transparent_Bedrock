@@ -22,7 +22,7 @@ public abstract class BlocksMixin {
             )
     )
     private static Block redirectRegister(String string, BlockBehaviour.Properties properties) {
-        if ("bedrock".equals(string)) {
+        if (string.equals("bedrock")) {
             return BlocksRegisterAccessor.invokeRegister(string, TransparentBlock::new, properties.noOcclusion());
         }
         return BlocksRegisterAccessor.register(string, properties);
